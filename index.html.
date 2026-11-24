@@ -1,0 +1,613 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f9ddec">
+<title>For My Jaan 💗</title>
+<style>
+:root{
+ --pink:#f3a8ca;--lav:#c9b6f5;--ink:#68445f;
+ --glass:rgba(255,255,255,.78);
+}
+*{box-sizing:border-box}
+body{
+ margin:0;font-family:Georgia,serif;color:var(--ink);
+ background:linear-gradient(135deg,#fff2f8,#f0eaff,#fff5fa);
+ min-height:100vh;overflow-x:hidden;
+}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+#particles{position:fixed;inset:0;pointer-events:none;z-index:0}
+.heart{
+ position:absolute;bottom:-40px;color:#e89bc4;
+ animation:floatUp linear infinite;
+}
+@keyframes floatUp{
+ to{transform:translateY(-115vh) rotate(360deg);opacity:0}
+}
+.sidebar{
+ position:fixed;z-index:5;top:0;bottom:0;left:0;
+ width:265px;background:#fffaf4ed;
+ backdrop-filter:blur(18px);
+ border-right:1px solid #f0d4e5;
+ display:flex;flex-direction:column;padding:18px 13px;
+}
+.logo{font-size:25px;font-weight:bold;padding:8px}
+.tagline{font:10px Arial;letter-spacing:3px;padding:0 8px 15px;color:#aa7895}
+#menu{overflow-y:auto;flex:1}
+.navbtn{
+ display:block;width:100%;border:0;background:none;
+ text-align:left;padding:9px 10px;border-radius:11px;
+ color:#76566d;font:12px Arial;transition:.2s;
+}
+.navbtn:hover,.navbtn.active{
+ background:linear-gradient(100deg,#f9d7e9,#e8ddff);
+ transform:translateX(4px);color:#713c61;
+}
+.navnum{opacity:.5;margin-right:10px}
+.sidebottom{font:11px Arial;padding:12px;color:#a17d95}
+main{position:relative;z-index:1;margin-left:265px;padding:25px 4vw 50px}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.eyebrow{font:10px Arial;letter-spacing:3px;color:#b77c9c}
+.btn{
+ border:1px solid #eed1e2;background:#fff;
+ padding:11px 17px;border-radius:30px;color:#80536f;
+ transition:.25s;margin:4px;
+}
+.btn:hover{transform:translateY(-3px);box-shadow:0 8px 20px #b783a933}
+.primary{background:linear-gradient(100deg,#ee9ec3,#b9a5ec);color:white;border:0}
+.hero{
+ margin-top:22px;padding:clamp(25px,5vw,65px);
+ min-height:350px;border:1px solid white;border-radius:30px;
+ background:linear-gradient(120deg,#ffffffd9,#ffe5f2e8,#e9e3ffe8);
+ box-shadow:0 20px 55px #a8799c20;
+ position:relative;overflow:hidden;
+}
+.hero:after{
+ content:"♡";position:absolute;right:4%;top:-60px;
+ font-size:300px;color:#e9b4d444;
+}
+.hero h1{font-size:clamp(48px,7vw,83px);line-height:.95;margin:20px 0;color:#794a68}
+.hero p{max-width:600px;font:15px/1.9 Arial;color:#8d7083}
+.pill{border:1px solid white;padding:9px 14px;border-radius:30px;font:11px Arial;background:#fff9}
+.sectionhead{margin:35px 0 15px}
+.sectionhead h2{font-size:34px;margin:7px 0}
+.sectionhead p{font:12px Arial;color:#a08094}
+.progress{height:6px;background:#f1dce8;border-radius:20px;overflow:hidden;margin:15px 0}
+.progress div{height:100%;width:1%;background:linear-gradient(90deg,#ee9ec3,#b9a5ec);transition:.4s}
+.panel{
+ background:var(--glass);border:1px solid white;border-radius:25px;
+ padding:clamp(20px,4vw,38px);box-shadow:0 15px 50px #9e71921c;
+ animation:appear .4s ease;
+}
+@keyframes appear{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:none}}
+.panel p{font:15px/1.9 Arial;color:#80677b}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px}
+.card{padding:17px;border:1px solid #f1d9e7;background:#fff9;border-radius:17px}
+.card strong{display:block;margin-bottom:8px;color:#9b6382}
+.card small{font:12px/1.6 Arial;color:#90798a}
+.letter{font:17px/1.95 Georgia,serif!important;white-space:pre-line}
+.field{padding:12px;border:1px solid #ebd1e0;border-radius:12px;width:min(100%,400px);margin:7px 0;background:white;color:#704c65}
+.output{font:14px/1.8 Arial;color:#995e83;margin:15px 0}
+.board{display:grid;grid-template-columns:repeat(3,85px);gap:8px;margin:20px 0}
+.cell{height:85px;border:1px solid #e9c9dc;border-radius:15px;background:white;color:#9a6386;font-size:30px}
+.memory{display:grid;grid-template-columns:repeat(4,65px);gap:8px;margin:20px 0}
+.mem{height:65px;background:white;border:1px solid #ebccdf;border-radius:12px;font-size:24px}
+#fireworks{position:fixed;inset:0;z-index:10;pointer-events:none}
+footer{text-align:center;font:12px Arial;color:#a58598;padding:40px}
+#mobileMenu{display:none}
+@media(max-width:750px){
+ .sidebar{width:280px;transform:translateX(-105%);transition:.3s;box-shadow:10px 0 40px #65405b33}
+ .sidebar.open{transform:translateX(0)}
+ main{margin-left:0;padding:15px}
+ #mobileMenu{display:inline-block}
+ .cards{grid-template-columns:1fr}
+ .hero h1{font-size:55px}
+ .sectionhead h2{font-size:28px}
+}
+</style>
+</head>
+<body>
+<div id="particles"></div>
+<canvas id="fireworks"></canvas>
+
+<aside class="sidebar" id="sidebar">
+ <div class="logo">For My Jaan 💗</div>
+ <div class="tagline">A WORLD OF LITTLE WISHES</div>
+ <nav id="menu"></nav>
+ <div class="sidebottom">Made with love & sparkle ✨</div>
+</aside>
+
+<main>
+ <div class="topbar">
+  <div>
+   <button class="btn" id="mobileMenu">☰ Menu</button>
+   <span class="eyebrow">A SPECIAL PLACE FOR YOU</span>
+  </div>
+  <button class="btn" id="soundButton">♫ Enable background sound</button>
+ </div>
+
+ <section class="hero">
+  <span class="pill">HAPPY BIRTHDAY ✨</span>
+  <h1>For My<br><em>Favorite</em><br>Person.</h1>
+  <p>A little universe made of beautiful wishes, sweet surprises, games, memories and happiness. Every page is made to celebrate you.</p>
+  <button class="btn primary" onclick="go(10)">Read Your Birthday Letter 💌</button>
+  <button class="btn" onclick="celebrate()">Surprise Me 🎁</button>
+ </section>
+
+ <div class="sectionhead">
+  <span class="eyebrow">YOUR PERSONAL BIRTHDAY WORLD</span>
+  <h2 id="sectionTitle">Welcome</h2>
+  <p id="sectionNumber">Section 01 / 100</p>
+ </div>
+ <div class="progress"><div id="progress"></div></div>
+ <section class="panel" id="content"></section>
+ <footer>Happy Birthday, Meri Jaan 💗<br>May your every tomorrow be beautiful.</footer>
+</main>
+
+<script>
+const names=[
+"Welcome","Birthday Magic","Our Little Story","A Sweet Hello","Your Smile",
+"Your Kind Heart","Your Dreams","Your Laughter","Little Things","Our Memories",
+"Birthday Letter","A Thousand Wishes","Peace","Joy","Courage",
+"Confidence","Success","Friendship","Adventure","Creativity",
+"Good Morning","Good Night","Read When You Need a Smile",
+"Read When You Need Courage","Read When You Need Rest",
+"Read When You Feel Proud","Read When You Need Hope",
+"Read When You Need a Laugh","Gentle Reminders","Compliment Jar",
+"Wish Jar","Memory Jar","Choose a Surprise","Lucky Number",
+"Fireworks","Confetti","Floating Hearts","Starry Sky","Birthday Cake",
+"Tic Tac Toe","Memory Match","Two Player Quiz","Rock Paper Scissors",
+"Scoreboard","Music Lounge","Ambient Sound","Sound Settings",
+"Make a Wish","Wish Generator","Daily Affirmation",
+"Kindness Challenge","Gratitude List","Mood Picker","Color Celebration",
+"Birthday Timeline","Future Adventure","Dream Board",
+"Things to Try","Future Self Letter","Friendship Note",
+"Respect","Patience","Growth","Learning","Family",
+"Nature","Music","Travel","Laughter","Special Qualities",
+"A Little Reminder","You Deserve Good Things","Take a Breather",
+"A Moment of Calm","Birthday Countdown","Celebration Checklist",
+"Party Planner","Song Dedication","Secret Message","Tap for Surprise",
+"Pick a Number","Choose a Star","Unlock a Wish","Compliment Wheel",
+"One More Wish","Hope for This Year","Hope for Next Year",
+"Gratitude Page","Dreams Page","Celebration Game","Happy Button",
+"Big Cheer","Final Wish","One Last Note","Thank You",
+"Keep Shining","Until Next Time","New Beginning","Made Just for You",
+"Forever a Celebration"
+];
+
+const wishes=[
+"May your days be filled with peace, kindness and happiness.",
+"May your dreams become plans and your plans become achievements.",
+"May you always find reasons to smile, even on ordinary days.",
+"May you meet people who respect you and encourage your growth.",
+"May you discover new places, hobbies and beautiful experiences.",
+"May you have the courage to begin and the patience to continue.",
+"May your heart always have room for hope and wonderful dreams.",
+"May you find happiness in the little moments of everyday life.",
+"May you always remember how valuable your thoughts and ideas are.",
+"May your coming year be full of lovely surprises and new memories."
+];
+
+const letter = `
+Happy Birthday, meri jaan. 💗
+
+Today is a special day, and I hope you know how much happiness, warmth and kindness you deserve. I wanted to make something a little different for your birthday, something that would feel like opening a tiny world full of surprises. This website is my collection of wishes, thoughts, smiles and little celebrations dedicated to you.
+
+First of all, I hope your birthday begins with a beautiful smile. I hope you wake up feeling peaceful, appreciated and excited about everything waiting ahead. You deserve a day that makes you feel special, not because everything has to be perfect, but because you deserve to enjoy the little things that make life beautiful.
+
+I hope this new chapter brings you countless opportunities to discover yourself. There are so many things waiting for you to explore. New places, new experiences, new friendships, new interests and new dreams. Never feel that you have to understand everything immediately. Life is a journey of learning, and every person moves at a different pace. Give yourself the freedom to grow naturally.
+
+I wish you happiness that does not depend on expensive gifts or extraordinary occasions. I hope you find it in your favourite songs, your favourite food, a peaceful afternoon, a beautiful sunset, a funny conversation and those unexpected moments that make you smile without even realizing it.
+
+I hope you always have people around you who genuinely care about you. People who listen to your thoughts, respect your opinions and encourage you to become the person you want to be. May you always experience friendships where kindness goes both ways and where you can be completely yourself without pretending.
+
+I wish you courage. Courage to try something new, courage to speak about what matters to you, courage to follow your dreams and courage to start again when something does not go according to plan. You do not have to be perfect. You do not have to know every answer. Being willing to learn is already something wonderful.
+
+I also wish you patience. Sometimes beautiful things take time. Some dreams need months or years of effort, and some plans change along the way. Do not compare your journey with somebody else's. Your life has its own timing, and your progress deserves to be appreciated even when it seems small.
+
+Please remember to take care of yourself. Make time for rest, laughter, creativity and the activities you enjoy. You do not need to be productive every moment. You are allowed to pause, relax and enjoy a quiet day. Your wellbeing matters just as much as your goals.
+
+May this year bring success in the things that are important to you. May you discover talents you did not know you had. May you find opportunities that help you learn and become more confident. When you achieve something, celebrate it. Even the smallest achievements deserve recognition.
+
+I hope you laugh more this year. I hope there are silly jokes, funny pictures, spontaneous conversations and moments when you cannot stop smiling. I hope you make memories that become favourite stories later. Life is not only about reaching destinations. It is also about enjoying the journey.
+
+Whenever life feels confusing, remember that you do not have to solve everything in one day. Take one step at a time. Ask for help when you need it. Give yourself the kindness you would give someone important to you. A difficult day is only one part of a much bigger story.
+
+I hope you continue discovering the things that make you happy. Perhaps it is music, art, travelling, reading, learning something new or spending time with the people you love. Whatever those things are, I hope you never feel that you must give them up just because life becomes busy.
+
+Thank you for being part of so many beautiful moments and memories. Every new day gives us another opportunity to learn, understand and appreciate the people around us. I hope the coming year gives you many moments worth remembering and many reasons to feel grateful.
+
+May your birthday be filled with warmth. May your favourite people make you laugh. May your favourite food taste even better. May your favourite songs make the day brighter. May unexpected little surprises remind you that happiness can appear in simple ways.
+
+I hope you always feel comfortable being yourself. You do not have to change your personality to make everyone happy. Your thoughts, interests, opinions and dreams are worth respecting. Keep learning, keep exploring and keep becoming the person you want to be.
+
+May you find strength during challenges and peace during busy moments. May you have enough confidence to make your own decisions and enough wisdom to learn from experiences. Never underestimate how much you can accomplish through patience, kindness and consistent effort.
+
+I wish you beautiful mornings, relaxing evenings, exciting adventures, meaningful friendships and unforgettable memories. I hope your future contains many opportunities that make you proud of yourself. I hope you look back at this birthday someday and remember it as the beginning of a wonderful chapter.
+
+And finally, I want you to remember one simple thing: you deserve kindness, happiness, respect and genuine appreciation. Not just today, but throughout the year. Never forget to celebrate yourself, appreciate your progress and make space for the things that bring meaning to your life.
+
+Happy Birthday once again, meri jaan. 🎂💗
+
+May your new year be brighter, calmer, happier and more exciting than the last. May your dreams keep growing, may your smile keep returning, and may every chapter bring something beautiful to discover.
+
+With lots of birthday wishes and endless good thoughts, this little website is dedicated to you. Enjoy every surprise, every game and every little page.
+
+HAPPY BIRTHDAY! 💗✨
+`;
+
+const menu=document.getElementById("menu");
+const content=document.getElementById("content");
+let current=0;
+let board=Array(9).fill("");
+let turn="X",scores=[0,0];
+let mem=[],selected=[],memPlayer=0,memScores=[0,0],memBusy=false;
+let quizIndex=0,quizScores=[0,0],rpsScores=[0,0];
+let musicContext=null,musicGain=null,musicOn=false;
+let savedItems=[];
+
+menu.innerHTML=names.map((n,i)=>
+ `<button class="navbtn" data-id="${i}" onclick="go(${i})"><span class="navnum">${String(i+1).padStart(2,"0")}</span>${n}</button>`
+).join("");
+
+function go(i){
+ current=i;
+ document.getElementById("sectionTitle").textContent=names[i];
+ document.getElementById("sectionNumber").textContent=`Section ${String(i+1).padStart(2,"0")} / 100`;
+ document.getElementById("progress").style.width=((i+1))+"%";
+ document.querySelectorAll(".navbtn").forEach((b,j)=>b.classList.toggle("active",i===j));
+ document.getElementById("sidebar").classList.remove("open");
+ render();
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function wishCards(){
+ return `<div class="cards">${wishes.slice(0,6).map((w,i)=>
+ `<div class="card"><strong>Wish ${i+1} ✨</strong><small>${w}</small></div>`
+ ).join("")}</div>`;
+}
+
+function render(){
+ let html=`<h2>${names[current]} 💗</h2>
+ <p>${wishes[current%wishes.length]}</p>
+ <p>${wishes[(current+3)%wishes.length]}</p>
+ ${wishCards()}
+ <div style="margin-top:20px">
+ <button class="btn primary" onclick="randomWish()">Give me another wish 🌷</button>
+ <button class="btn" onclick="surprise()">Open a surprise 🎁</button>
+ <p id="result" class="output"></p>
+ </div>`;
+
+ if(current===0) html=`
+ <h2>Welcome to your little world 💗</h2>
+ <p>This is a birthday collection made with wishes, games, surprises and happy thoughts.</p>
+ <p>Explore the 100 sections from the left menu. There is something special waiting on every page.</p>
+ <button class="btn primary" onclick="go(10)">Open birthday letter 💌</button>
+ <button class="btn" onclick="celebrate()">Start the celebration 🎆</button>`;
+
+ if(current===10) html=`
+ <h2>A letter for you 💌</h2>
+ <div class="letter">${letter}</div>
+ <button class="btn primary" onclick="window.print()">Print / Save letter</button>`;
+
+ if(current===39) html=tttHTML();
+ if(current===40) html=memoryHTML();
+ if(current===41) html=quizHTML();
+ if(current===42) html=rpsHTML();
+ if(current===43) html=`
+ <h2>Two-player scoreboard 🏆</h2>
+ <p>Player 1: ${scores[0]} wins</p>
+ <p>Player 2: ${scores[1]} wins</p>
+ <p>Memory Player 1: ${memScores[0]} pairs</p>
+ <p>Memory Player 2: ${memScores[1]} pairs</p>
+ <button class="btn" onclick="resetScores()">Reset scores</button>`;
+
+ if([34,35,36,37,38,91,92].includes(current)) html=`
+ <h2>Let the celebration begin! 🎆</h2>
+ <p>Make this moment sparkle with animated fireworks and confetti.</p>
+ <button class="btn primary" onclick="celebrate()">Launch fireworks</button>
+ <button class="btn" onclick="confetti()">Release confetti</button>`;
+
+ if([44,45,46].includes(current)) html=`
+ <h2>Ambient sound lounge ♫</h2>
+ <p>A continuous atmospheric soundscape generated directly by your browser. It uses soft sustained sound and gentle filtered noise, not a tune or melody.</p>
+ <button class="btn primary" onclick="toggleMusic()">Play / Pause sound</button>
+ <p class="output">${musicOn?"Ambient sound is playing":"Sound is paused"}</p>
+ <p>If your browser blocks autoplay, press the sound button at the top.</p>`;
+
+ if(current===48) html=`
+ <h2>Make a birthday wish 🌟</h2>
+ <input id="wishInput" class="field" placeholder="Write your birthday wish">
+ <button class="btn primary" onclick="saveWish()">Save my wish</button>
+ <p id="result" class="output"></p>`;
+
+ if([29,30,31,32,47,49,50,51,55,56,57,58,59,70,71,72,73,77,78,79,80,81,82,83,84,85,86,87,88,89,93,94,95,96,97,98,99].includes(current)) html=`
+ <h2>${names[current]} ✨</h2>
+ <p>${wishes[current%wishes.length]}</p>
+ <textarea id="note" class="field" rows="4" placeholder="Write something special here..."></textarea><br>
+ <button class="btn primary" onclick="saveNote()">Save note</button>
+ <button class="btn" onclick="surprise()">Reveal surprise</button>
+ <p id="result" class="output"></p>`;
+
+ if(current===52) html=`
+ <h2>How are you feeling? 🌸</h2>
+ <select id="mood" class="field">
+ <option>Happy 😊</option><option>Calm 🌿</option>
+ <option>Excited ✨</option><option>Thoughtful 💭</option>
+ <option>Relaxed 🌙</option>
+ </select>
+ <button class="btn primary" onclick="showMood()">Save mood</button>
+ <p id="result" class="output"></p>`;
+
+ if(current===74) html=`
+ <h2>Birthday countdown ⏳</h2>
+ <p>Get ready for a little celebration.</p>
+ <button class="btn primary" onclick="countdown()">Start countdown</button>
+ <h2 id="timer">🎂</h2>`;
+
+ if(current===75) html=`
+ <h2>Celebration checklist 🎀</h2>
+ ${["Enjoy your favourite treat","Listen to favourite music","Make a birthday wish","Take a lovely break","Share a laugh","Enjoy the little moments"].map(x=>`<p><label><input type="checkbox"> ${x}</label></p>`).join("")}`;
+
+ if(current===76) html=`
+ <h2>Party planner 🎉</h2>
+ <input class="field" id="party" placeholder="Celebration idea"><br>
+ <input class="field" id="treat" placeholder="Favourite treat"><br>
+ <button class="btn primary" onclick="planParty()">Save plan</button>
+ <p id="result"></p>`;
+
+ content.innerHTML=html;
+}
+
+function randomWish(){
+ let el=document.getElementById("result");
+ if(el)el.textContent=wishes[Math.floor(Math.random()*wishes.length)];
+}
+function surprise(){
+ let messages=["A beautiful year is waiting for you! 💗","You deserve wonderful things! 🌷","May every dream find its way! ✨","Sending a thousand birthday wishes! 🎂"];
+ alert(messages[Math.floor(Math.random()*messages.length)]);
+ celebrate();
+}
+function saveNote(){
+ let val=document.getElementById("note")?.value;
+ if(!val)return;
+ savedItems.push(val);
+ document.getElementById("result").textContent="Your note has been saved for this visit 💗";
+}
+function saveWish(){
+ let v=document.getElementById("wishInput").value;
+ document.getElementById("result").textContent=v?"Your wish: "+v:"Write your wish first!";
+}
+function showMood(){
+ document.getElementById("result").textContent="Your selected mood: "+document.getElementById("mood").value;
+}
+function planParty(){
+ document.getElementById("result").textContent="Idea: "+document.getElementById("party").value+" | Treat: "+document.getElementById("treat").value;
+}
+function countdown(){
+ let n=3,e=document.getElementById("timer");
+ e.textContent=n;
+ let t=setInterval(()=>{
+ n--;e.textContent=n>0?n:"HAPPY BIRTHDAY! 🎂";
+ if(n<=0){clearInterval(t);celebrate()}
+ },1000);
+}
+
+// TWO PLAYER TIC TAC TOE
+function tttHTML(){
+ let w=winner(board);
+ return `<h2>Tic Tac Toe ❌⭕</h2>
+ <p>Player 1 is X. Player 2 is O.</p>
+ <h3>${w?`Player ${w==="X"?1:2} wins!`:board.every(Boolean)?"It's a draw!":`Player ${turn==="X"?1:2}'s turn`}</h3>
+ <div class="board">${board.map((v,i)=>`<button class="cell" onclick="playCell(${i})">${v}</button>`).join("")}</div>
+ <p>Player 1: ${scores[0]} | Player 2: ${scores[1]}</p>
+ <button class="btn primary" onclick="resetTTT()">New round</button>`;
+}
+function winner(b){
+ for(let [a,c,d] of [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]])
+ if(b[a]&&b[a]===b[c]&&b[a]===b[d])return b[a];
+ return null;
+}
+function playCell(i){
+ if(board[i]||winner(board)||board.every(Boolean))return;
+ board[i]=turn;
+ let w=winner(board);
+ if(w)scores[w==="X"?0:1]++;
+ else turn=turn==="X"?"O":"X";
+ render();
+}
+function resetTTT(){board=Array(9).fill("");turn="X";render()}
+
+// TWO PLAYER MEMORY MATCH
+function resetMem(){
+ let a=["🌸","⭐","🎂","💗","🎁","🦋","🌙","✨"];
+ mem=[...a,...a].sort(()=>Math.random()-.5).map(v=>({v,open:false,done:false}));
+ selected=[];memPlayer=0;memScores=[0,0];memBusy=false;
+}
+function memoryHTML(){
+ if(!mem.length)resetMem();
+ return `<h2>Memory Match 🧠</h2>
+ <p>Player ${memPlayer+1}'s turn. Find two matching cards.</p>
+ <div class="memory">${mem.map((v,i)=>`<button class="mem" onclick="flip(${i})">${v.open||v.done?v.v:"?"}</button>`).join("")}</div>
+ <p>Player 1: ${memScores[0]} | Player 2: ${memScores[1]}</p>
+ <button class="btn primary" onclick="resetMem();render()">Reset game</button>`;
+}
+function flip(i){
+ if(memBusy||mem[i].done||mem[i].open)return;
+ mem[i].open=true;selected.push(i);
+ if(selected.length===2){
+  memBusy=true;
+  let [a,b]=selected;
+  if(mem[a].v===mem[b].v){
+   mem[a].done=mem[b].done=true;
+   memScores[memPlayer]++;
+   selected=[];memBusy=false;
+  }else{
+   setTimeout(()=>{
+    mem[a].open=mem[b].open=false;
+    selected=[];memPlayer=1-memPlayer;memBusy=false;
+    if(current===40)render();
+   },850);
+  }
+ }
+ render();
+}
+
+// TWO PLAYER QUIZ
+const questions=[
+ ["Which planet is called the Red Planet?","mars"],
+ ["How many days are in a leap year?","366"],
+ ["Which is the largest ocean?","pacific"],
+ ["What is the closest star to Earth?","sun"],
+ ["How many sides does a hexagon have?","6"],
+ ["What is the opposite of north?","south"]
+];
+let qi=0,qscore=[0,0];
+function quizHTML(){
+ return `<h2>Two Player Quiz 🧩</h2>
+ <p>Player ${qi%2+1}: ${questions[qi%questions.length][0]}</p>
+ <input class="field" id="answer" placeholder="Your answer">
+ <button class="btn primary" onclick="answerQuiz()">Submit answer</button>
+ <p>Player 1: ${qscore[0]} | Player 2: ${qscore[1]}</p>
+ <p id="quizResult"></p>
+ <button class="btn" onclick="qi=0;qscore=[0,0];render()">Reset quiz</button>`;
+}
+function answerQuiz(){
+ let a=document.getElementById("answer").value.trim().toLowerCase();
+ let correct=questions[qi%questions.length][1];
+ let player=qi%2;
+ if(a===correct)qscore[player]++;
+ document.getElementById("quizResult").textContent=a===correct?"Correct! 🎉":"The answer was "+correct;
+ qi++;
+ setTimeout(()=>{if(current===41)render()},1100);
+}
+
+// TWO PLAYER ROCK PAPER SCISSORS
+let rps=["Rock","Paper","Scissors"];
+function rpsHTML(){
+ return `<h2>Rock Paper Scissors ✊</h2>
+ <p>Both players select their choice and reveal the result.</p>
+ <p>Player 1</p><select id="r1" class="field">${rps.map(x=>`<option>${x}</option>`)}</select>
+ <p>Player 2</p><select id="r2" class="field">${rps.map(x=>`<option>${x}</option>`)}</select><br>
+ <button class="btn primary" onclick="playRPS()">Reveal choices</button>
+ <p id="rpsResult" class="output"></p>
+ <p>Player 1 wins: ${rpsScores[0]} | Player 2 wins: ${rpsScores[1]}</p>
+ <button class="btn" onclick="rpsScores=[0,0];render()">Reset score</button>`;
+}
+function playRPS(){
+ let a=document.getElementById("r1").value,b=document.getElementById("r2").value;
+ let result=a===b?"It's a draw!":({Rock:"Scissors",Paper:"Rock",Scissors:"Paper"}[a]===b?"Player 1 wins!":"Player 2 wins!");
+ if(result.includes("Player 1"))rpsScores[0]++;
+ if(result.includes("Player 2"))rpsScores[1]++;
+ document.getElementById("rpsResult").textContent=`${a} vs ${b} — ${result}`;
+}
+function resetScores(){scores=[0,0];memScores=[0,0];qscore=[0,0];rpsScores=[0,0];render()}
+
+// AMBIENT SOUND: browser generated, sustained, non-melodic
+async function toggleMusic(){
+ try{
+  if(musicOn){
+   await musicContext.suspend();musicOn=false;
+   document.getElementById("soundButton").textContent="♫ Enable background sound";
+   return;
+  }
+  const AC=window.AudioContext||window.webkitAudioContext;
+  if(!AC){alert("Audio is not supported by this browser.");return}
+  if(!musicContext){
+   musicContext=new AC();
+   musicGain=musicContext.createGain();
+   musicGain.gain.value=.10;
+   musicGain.connect(musicContext.destination);
+   [65.4,98,130.8].forEach((freq,i)=>{
+    let osc=musicContext.createOscillator();
+    let gain=musicContext.createGain();
+    let filter=musicContext.createBiquadFilter();
+    osc.type="sine";
+    osc.frequency.value=freq;
+    filter.type="lowpass";filter.frequency.value=350;
+    gain.gain.value=[.35,.10,.045][i];
+    osc.connect(filter);filter.connect(gain);gain.connect(musicGain);
+    osc.start();
+   });
+   let noiseBuffer=musicContext.createBuffer(1,musicContext.sampleRate*2,musicContext.sampleRate);
+   let data=noiseBuffer.getChannelData(0);
+   for(let i=0;i<data.length;i++)data[i]=Math.random()*2-1;
+   let noise=musicContext.createBufferSource();
+   let ng=musicContext.createGain();
+   let nf=musicContext.createBiquadFilter();
+   noise.buffer=noiseBuffer;noise.loop=true;
+   nf.type="lowpass";nf.frequency.value=220;
+   ng.gain.value=.012;
+   noise.connect(nf);nf.connect(ng);ng.connect(musicGain);noise.start();
+  }
+  await musicContext.resume();musicOn=true;
+  document.getElementById("soundButton").textContent="♫ Pause background sound";
+ }catch(e){console.log(e)}
+}
+
+// FIREWORKS
+const canvas=document.getElementById("fireworks");
+const ctx=canvas.getContext("2d");
+let particles=[];
+function resize(){canvas.width=innerWidth;canvas.height=innerHeight}
+resize();addEventListener("resize",resize);
+function burst(x,y){
+ for(let i=0;i<65;i++){
+  let a=Math.random()*Math.PI*2,s=1+Math.random()*5;
+  particles.push({x,y,vx:Math.cos(a)*s,vy:Math.sin(a)*s,life:80,color:`hsl(${Math.random()*360},90%,70%)`});
+ }
+}
+function animateFireworks(){
+ ctx.clearRect(0,0,canvas.width,canvas.height);
+ particles=particles.filter(p=>p.life>0);
+ particles.forEach(p=>{
+  p.x+=p.vx;p.y+=p.vy;p.vy+=.035;p.life--;
+  ctx.globalAlpha=p.life/80;ctx.fillStyle=p.color;
+  ctx.beginPath();ctx.arc(p.x,p.y,3,0,Math.PI*2);ctx.fill();
+ });
+ ctx.globalAlpha=1;
+ requestAnimationFrame(animateFireworks);
+}
+animateFireworks();
+function celebrate(){
+ for(let i=0;i<5;i++)setTimeout(()=>burst(Math.random()*canvas.width,Math.random()*canvas.height*.65),i*250);
+ confetti();
+}
+function confetti(){
+ for(let i=0;i<70;i++){
+  let e=document.createElement("span");
+  e.className="heart";e.textContent=["✦","♡","❀","✧"][i%4];
+  e.style.left=Math.random()*100+"vw";
+  e.style.animationDuration=(3+Math.random()*5)+"s";
+  document.getElementById("particles").appendChild(e);
+  setTimeout(()=>e.remove(),9000);
+ }
+}
+
+// FLOATING BACKGROUND
+for(let i=0;i<24;i++){
+ let e=document.createElement("span");
+ e.className="heart";e.textContent=["♡","✧","✦","❀"][i%4];
+ e.style.left=Math.random()*100+"%";
+ e.style.animationDuration=(12+Math.random()*15)+"s";
+ e.style.animationDelay=(-Math.random()*20)+"s";
+ e.style.fontSize=(12+Math.random()*17)+"px";
+ document.getElementById("particles").appendChild(e);
+}
+
+document.getElementById("mobileMenu").onclick=()=>{
+ document.getElementById("sidebar").classList.toggle("open");
+};
+document.getElementById("soundButton").onclick=toggleMusic;
+
+// Attempt audio startup. Browser policies may require user interaction.
+window.addEventListener("load",()=>{
+ try{toggleMusic()}catch(e){}
+});
+go(0);
+</script>
+</body>
+</html>
